@@ -88,32 +88,31 @@ st.markdown(f"""
         line-height: 1.6;
     }}
 
-    /* --- Info box cómo funciona --- */
+    /* --- Info box cómo funciona (Azul estilo imagen) --- */
     .info-box {{
-        background-color: #f0f7f4;
-        border-left: 4px solid #2d6a4f;
+        background-color: #e7f1f7;
         border-radius: 8px;
-        padding: 1rem 1.2rem;
+        padding: 1.2rem;
         margin: 1rem 0;
+        color: #31708f;
     }}
 
     .info-box h4 {{
-        color: #2d6a4f;
+        color: #245671;
         font-weight: 600;
-        margin: 0 0 0.6rem 0;
-        font-size: 0.95rem;
+        margin: 0 0 0.8rem 0;
+        font-size: 1rem;
     }}
 
     .info-box ol {{
         margin: 0;
         padding-left: 1.2rem;
-        color: #2d6a4f;
-        font-size: 0.88rem;
-        line-height: 1.8;
+        font-size: 0.9rem;
+        line-height: 1.6;
     }}
 
     .info-box ol li {{
-        margin-bottom: 0.1rem;
+        margin-bottom: 0.4rem;
     }}
 
     /* --- Footer sidebar --- */
@@ -134,100 +133,55 @@ st.markdown(f"""
         box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }}
 
-    /* --- Card de resultado --- */
-    .result-card {{
-        background: #fafbfc;
-        border: 1px solid #e9ecef;
+    /* --- Tarjeta de producto (estilo imagen recibida) --- */
+    .product-card {{
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
         border-radius: 12px;
-        padding: 1rem;
-        margin-bottom: 0.5rem;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }}
-
-    .result-card:hover {{
-        transform: translateY(-2px);
-        box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-    }}
-
-    /* --- Etiqueta de match --- */
-    .match-badge {{
-        display: inline-block;
-        background: linear-gradient(135deg, #2d6a4f, #40916c);
-        color: white;
-        padding: 0.25rem 0.7rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-    }}
-
-    .match-badge-secondary {{
-        display: inline-block;
-        background: linear-gradient(135deg, #457b9d, #669bbc);
-        color: white;
-        padding: 0.25rem 0.7rem;
-        border-radius: 20px;
-        font-size: 0.8rem;
-        font-weight: 600;
-    }}
-
-    /* --- Nombre de lana --- */
-    .wool-name {{
-        font-weight: 600;
-        color: #1a1a2e;
-        font-size: 0.95rem;
-        margin-top: 0.4rem;
-    }}
-
-    /* --- Separador --- */
-    .divider {{
-        border: none;
-        border-top: 1px solid #e9ecef;
-        margin: 1rem 0;
-    }}
-
-    /* --- Upload area --- */
-    [data-testid="stFileUploader"] {{
-        border: 2px dashed #2d6a4f !important;
-        border-radius: 12px !important;
-        padding: 0.5rem !important;
-    }}
-
-    /* --- Info message --- */
-    .stAlert {{
-        border-radius: 10px;
-    }}
-
-    /* --- Expander personalizado --- */
-    .streamlit-expanderHeader {{
-        font-size: 0.9rem !important;
-        color: #555 !important;
-    }}
-
-    /* Sección de paso activo */
-    .step-indicator {{
+        padding: 20px;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        margin-bottom: 10px;
+        height: 100%;
         display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: 0.5rem;
-        padding: 0.4rem 0;
+        justify-content: space-between;
     }}
 
-    .step-number {{
-        background: #2d6a4f;
-        color: white;
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 0.75rem;
-        font-weight: 600;
-        flex-shrink: 0;
-    }}
-
-    .step-text {{
-        font-size: 0.85rem;
+    .product-name-new {{
+        font-weight: 700;
         color: #333;
+        font-size: 1.1rem;
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }}
+
+    .product-match-new {{
+        color: #777;
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }}
+
+    /* --- Botón estilizado --- */
+    .custom-button {{
+        display: inline-block;
+        width: 100%;
+        padding: 10px 0;
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        border-radius: 8px;
+        color: #333;
+        text-decoration: none !important;
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: background-color 0.2s;
+        margin-top: 10px;
+    }}
+
+    .custom-button:hover {{
+        background-color: #f8f9fa;
+        border-color: #999999;
     }}
 </style>
 """, unsafe_allow_html=True)
@@ -250,7 +204,7 @@ with st.sidebar:
         <ol>
             <li>Sube una foto de tu proyecto.</li>
             <li>Detectamos los colores clave.</li>
-            <li>Te sugerimos las mejores telas<br>de nuestro inventario.</li>
+            <li>Te sugerimos las mejores lanas de nuestro inventario.</li>
         </ol>
     </div>
     """, unsafe_allow_html=True)
@@ -344,7 +298,7 @@ def calculate_distance(color1_lab, color2_lab):
 # =============================================
 
 # Título principal
-st.markdown("# Descubre tus Telas Ideales")
+st.markdown("# Descubre tus Lanas Ideales")
 st.markdown(
     '<p class="subtitle">Sube la foto de tu proyecto y deja que nuestra IA encuentre '
     'la combinación perfecta de nuestra colección.</p>',
@@ -439,84 +393,75 @@ else:
     progress_bar.progress(100)
 
     st.markdown("---")
-    st.markdown("## 🎨 Colores Detectados y Telas Recomendadas")
-
-    for item in results:
+    
+    st.markdown("### Colores que armonizan perfectamente con tu foto")
+    
+    for idx, item in enumerate(results):
         r, g, b = item['detected_rgb']
         color_hex = f"#{r:02x}{g:02x}{b:02x}"
 
-        st.markdown('<div class="result-card">', unsafe_allow_html=True)
+        # Layout de 3 columnas como en la imagen
+        cols = st.columns([1, 1.5, 1.5])
 
-        cols = st.columns([1, 2, 2])
-
-        # Columna 1: Color detectado
+        # Columna 1: Info del Color Detectado
         with cols[0]:
+            st.markdown(f"**Color Detectado #{idx + 1}**")
             st.markdown(f"""
-            <div style="text-align: center;">
-                <div class="color-swatch" style="background-color: {color_hex}; margin: 0 auto;"></div>
-                <p style="margin-top: 0.5rem; font-size: 0.8rem; color: #666;">
-                    <strong>{color_hex.upper()}</strong><br>
-                    RGB({r}, {g}, {b})
-                </p>
+            <div style="background-color: {color_hex}; width: 100%; height: 100px; border-radius: 8px; border: 1px solid #eee; margin: 10px 0;"></div>
+            <div style="font-size: 0.8rem; color: #777; font-family: monospace;">
+                RGB: ({r}, {g}, {b})
             </div>
             """, unsafe_allow_html=True)
 
-        # Columna 2: Primera opción
+        # Columna 2: Sugerencia 1
         with cols[1]:
-            rec1 = item['recommendations'][0]
-            st.markdown(f'<span class="match-badge">✓ Mejor coincidencia · {rec1["score"]:.0f}%</span>', unsafe_allow_html=True)
-
-            # Intentar cargar desde ruta local, sino desde URL
-            img_file = str(rec1['image_file'])
-            # Si es solo el nombre del archivo, buscar en imagenes_lanas
+            st.markdown("**Sugerencia 1**")
+            rec = item['recommendations'][0]
+            img_file = str(rec['image_file'])
             if not os.path.isabs(img_file) and not img_file.startswith("http"):
-                 img_path = os.path.join("imagenes_lanas", img_file)
+                img_path = os.path.join("imagenes_lanas", img_file)
             else:
-                 img_path = img_file
+                img_path = img_file
+            
+            img_b64 = get_base64_image(img_path) if os.path.exists(img_path) else None
+            img_src = f"data:image/jpeg;base64,{img_b64}" if img_b64 else rec.get('image_url', '')
 
-            if os.path.exists(img_path):
-                st.image(img_path, width=150)
-            elif 'image_url' in rec1 and rec1['image_url']:
-                 img_url = str(rec1['image_url'])
-                 # Si 'image_url' tiene una ruta absoluta local
-                 if os.path.exists(img_url):
-                     st.image(img_url, width=150)
-                 else:
-                     st.image(img_url, width=150) # Intentar como URL
-            else:
-                st.warning(f"Imagen no encontrada: {rec1['image_file']}")
+            st.markdown(f"""
+            <div class="product-card">
+                <img src="{img_src}" style="max-width: 100%; height: 150px; object-fit: contain; border-radius: 4px;">
+                <div class="product-name-new">{rec['name']}</div>
+                <div class="product-match-new">Match: {rec['score']:.1f}%</div>
+                <a href="https://piccolo.com.co/producto/lana-vellon-individual/" class="custom-button">
+                    🛍️ Ver Producto
+                </a>
+            </div>
+            """, unsafe_allow_html=True)
 
-            st.markdown(f'<div class="wool-name">{rec1["name"]}</div>', unsafe_allow_html=True)
-
-        # Columna 3: Segunda opción
+        # Columna 3: Sugerencia 2
         with cols[2]:
-            rec2 = item['recommendations'][1]
-            st.markdown(f'<span class="match-badge-secondary">Opción 2 · {rec2["score"]:.0f}%</span>', unsafe_allow_html=True)
-
-            # Intentar cargar desde ruta local, sino desde URL
-            img_file_2 = str(rec2['image_file'])
-            # Si es solo el nombre del archivo, buscar en imagenes_lanas
-            if not os.path.isabs(img_file_2) and not img_file_2.startswith("http"):
-                 img_path_2 = os.path.join("imagenes_lanas", img_file_2)
+            st.markdown("**Sugerencia 2**")
+            rec = item['recommendations'][1]
+            img_file = str(rec['image_file'])
+            if not os.path.isabs(img_file) and not img_file.startswith("http"):
+                img_path = os.path.join("imagenes_lanas", img_file)
             else:
-                 img_path_2 = img_file_2
+                img_path = img_file
+            
+            img_b64 = get_base64_image(img_path) if os.path.exists(img_path) else None
+            img_src = f"data:image/jpeg;base64,{img_b64}" if img_b64 else rec.get('image_url', '')
 
-            if os.path.exists(img_path_2):
-                st.image(img_path_2, width=150)
-            elif 'image_url' in rec2 and rec2['image_url']:
-                 img_url_2 = str(rec2['image_url'])
-                 # Si 'image_url' tiene una ruta absoluta local
-                 if os.path.exists(img_url_2):
-                     st.image(img_url_2, width=150)
-                 else:
-                     st.image(img_url_2, width=150) # Intentar como URL
-            else:
-                st.warning(f"Imagen no encontrada: {rec2['image_file']}")
+            st.markdown(f"""
+            <div class="product-card">
+                <img src="{img_src}" style="max-width: 100%; height: 150px; object-fit: contain; border-radius: 4px;">
+                <div class="product-name-new">{rec['name']}</div>
+                <div class="product-match-new">Match: {rec['score']:.1f}%</div>
+                <a href="https://piccolo.com.co/producto/lana-vellon-individual/" class="custom-button">
+                    🛍️ Ver Producto
+                </a>
+            </div>
+            """, unsafe_allow_html=True)
 
-            st.markdown(f'<div class="wool-name">{rec2["name"]}</div>', unsafe_allow_html=True)
-
-        st.markdown('</div>', unsafe_allow_html=True)
-        st.markdown('<hr class="divider">', unsafe_allow_html=True)
+        st.markdown('<hr style="border: 0.5px solid #eee; margin: 30px 0;">', unsafe_allow_html=True)
 
     # Completado
     status_text.markdown("""
